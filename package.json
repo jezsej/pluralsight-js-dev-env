@@ -5,20 +5,25 @@
     "scripts": {
         "prestart": "babel-node buildScripts/startMessage",
         "start": "babel-node buildScripts/srcServer.js",
-        "share": "npm-run-all --parallel start localtunnel",
-        "localtunnel": "lt --port 3000"
+        "lint": "esw webpack.config.* src buildScripts --color",
+        "lint:watch": "npm run lint -- --watch",
+        "share": "npm-run-all --parallel start localtunnel lint:watch test:watch",
+        "localtunnel": "lt --port 3000",
+        "test": "mocha --reporter progress buildScripts/testSetup.js \"src/**/*.test.js\"",
+        "test:watch": "npm run test -- --watch"
     },
     "author": "Cory House",
     "license": "MIT",
     "dependencies": {
         "braces": "3.0.2",
         "lodash": "4.17.11",
+        "node-fetch": "^2.6.0",
         "whatwg-fetch": "1.0.0"
     },
     "devDependencies": {
         "babel-cli": "^6.26.0",
         "babel-core": "6.17.0",
-        "babel-loader": "6.2.5",
+        "babel-loader": "^7.1.4",
         "babel-preset-latest": "6.16.0",
         "babel-register": "6.16.3",
         "chai": "3.5.0",
