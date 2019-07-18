@@ -1,0 +1,22 @@
+#Against this version of node
+environment:
+  matrix:
+  #node version
+  - nodejs_version:"10"
+
+#install scripts that run after repo cloning
+install:
+  -ps: Install-Product node $env:nodejs_version
+  #install modules
+  - npm install
+
+#post install test scripts
+test-script:
+  #output useful information for debugging
+  - node --version
+  - npm --version
+  #run test
+  - npm test
+
+#Don't actually build
+build: off
