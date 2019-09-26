@@ -1,5 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 export default {
     mode: 'development',
@@ -14,6 +15,12 @@ export default {
         filename: 'bundle.js'
     },
     plugins: [
+        //Create html file that includes references to bundle.js
+        new HtmlWebpackPlugin({
+            template: 'src/index.html',
+            inject: true,
+        }),
+
         new webpack.LoaderOptionsPlugin({
             debug: true,
             noInfo: false
